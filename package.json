@@ -13,7 +13,8 @@
   "author": "nikolai b.",
   "license": "ISC",
   "dependencies": {
-    "commander": "^12.1.0"
+    "commander": "^12.1.0",
+    "yaml": "^2.5.0"
   },
   "devDependencies": {
     "@eslint/create-config": "^1.2.0",
