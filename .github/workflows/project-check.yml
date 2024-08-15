@@ -28,7 +28,7 @@ jobs:
       - name: Code Climate Coverage Action
         uses: paambaati/codeclimate-action@v8.0.0
         env:
-          CodeClimate: ${{ secrets.CC_TEST_REPORTER_ID }}
+          CC_TEST_REPORTER_ID: ${{ secrets.CC_TEST_REPORTER_ID }}
         with:
           coverageCommand: make test-coverage
           debug: true
