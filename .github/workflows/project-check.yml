@@ -1,0 +1,34 @@
+name: linter and tests check
+
+on:
+  - push
+  - pull_request
+
+jobs:
+  check:
+
+    runs-on: ubuntu-latest
+
+    strategy:
+      # Node versions list
+      matrix:
+        node-version: [20.x]
+
+    steps:
+      
+      - uses: actions/checkout@v4
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v4
+        with: 
+          node-version: ${{ matrix.node-version }}
+          cache: 'npm'
+      - run: make install
+      - run: make lint
+      - run: make test
+      - name: Test & publish code coverage
+        uses: paambaati/codeclimate-action@v5.0.0
+        env:
+          CC_TEST_REPORTER_ID: ${{ a283b289463d90ec99c1da1c22e816591a1f6090f63dfae0f1cafe2fa353bd90 }}
+        with:
+          coverageCommand: make test-coverage
+          debug: true
