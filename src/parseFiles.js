@@ -1,4 +1,4 @@
-import { parse as yamlParse, stringify } from 'yaml';
+import { parse as yamlParse } from 'yaml';
 
 const parseFiles = (file1Data, file2Data, ext) => {
   if (ext === '.json') {
