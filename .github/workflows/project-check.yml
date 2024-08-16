@@ -24,7 +24,6 @@ jobs:
           node-version: ${{ matrix.node-version }}
           cache: "npm"
       - run: make install
-      - run: make lint
       - run: make test
       - name: Code Climate Coverage Action
         uses: paambaati/codeclimate-action@v8.0.0
@@ -33,3 +32,4 @@ jobs:
         with:
           coverageCommand: make test-coverage
           debug: true
+      - run: make lint
