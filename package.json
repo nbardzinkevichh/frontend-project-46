@@ -7,6 +7,10 @@
   "scripts": {
     "test": "npx jest"
   },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nbardzinkevichh/frontend-project-46.git"
+  },
   "bin": {
     "gendiff": "bin/gendiff.js"
   },

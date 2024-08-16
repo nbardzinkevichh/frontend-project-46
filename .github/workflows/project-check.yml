@@ -4,6 +4,9 @@ on:
   - push
   - pull_request
 
+env:
+  CI: true
+
 jobs:
   check:
     runs-on: ubuntu-latest
