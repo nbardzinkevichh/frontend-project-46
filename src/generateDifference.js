@@ -6,7 +6,6 @@ const generateDifference = (fileData) => {
   const dataKeys1 = Object.keys(data1);
   const dataKeys2 = Object.keys(data2);
   const dataKeys = _.union(dataKeys1, dataKeys2);
-  // change arch to use spread syntax
   const differences = dataKeys.reduce((acc, current) => {
     let newAcc = acc;
     if (!Object.hasOwn(data1, current)) {

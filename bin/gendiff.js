@@ -1,14 +1,18 @@
 #!/usr/bin/env node
 
 import { program } from 'commander';
+import { fileURLToPath } from 'url';
+import { dirname } from 'path';
 import path from 'node:path';
 import { readFileSync } from 'node:fs';
+
 import generateDifference from '../src/generateDifference.js';
 import parseFiles from '../src/parsers.js';
 
-// add try catch structure to deal with wrong file names
-// change path normalization to use node.path instead
-const normalizedPath = (filePath) => (filePath.startsWith('../') ? filePath.replace('../', '') : filePath);
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
+
+const normalizedPath = (filename) => path.join(__dirname, '..', 'mock_data', filename);
 
 program
   .description('Compares two configuration files and shows a difference.')
