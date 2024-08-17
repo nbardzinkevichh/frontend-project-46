@@ -6,22 +6,23 @@ const generateDifference = (fileData) => {
   const dataKeys1 = Object.keys(data1);
   const dataKeys2 = Object.keys(data2);
   const dataKeys = _.union(dataKeys1, dataKeys2);
-  // change 'for' to reduce method
-  let differences = '{\n';
-  for (const key of dataKeys) {
-    if (!Object.hasOwn(data1, key)) {
-      differences += `  + ${key}: ${data2[key]}\n`;
-    } else if (!Object.hasOwn(data2, key)) {
-      differences += `  - ${key}: ${data1[key]}\n`;
-    } else if (data1[key] !== data2[key]) {
-      differences += `  - ${key}: ${data1[key]}\n`;
-      differences += `  + ${key}: ${data2[key]}\n`;
+  // change arch to use spread syntax
+  const differences = dataKeys.reduce((acc, current) => {
+    let newAcc = acc;
+    if (!Object.hasOwn(data1, current)) {
+      newAcc += `  + ${current}: ${data2[current]}\n`;
+    } else if (!Object.hasOwn(data2, current)) {
+      newAcc += `  - ${current}: ${data1[current]}\n`;
+    } else if (data1[current] !== data2[current]) {
+      newAcc += `  - ${current}: ${data1[current]}\n`;
+      newAcc += `  + ${current}: ${data2[current]}\n`;
     } else {
-      differences += `    ${key}: ${data1[key]}\n`;
+      newAcc += `    ${current}: ${data1[current]}\n`;
     }
-  }
-  differences = `${differences.trim()}\n}`;
-  return differences;
+    return newAcc;
+  }, '{\n');
+
+  return differences.concat('}');
 };
 
 export default generateDifference;
