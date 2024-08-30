@@ -3,6 +3,7 @@ import { readFileSync } from 'node:fs';
 import { fileURLToPath } from 'url';
 import { dirname } from 'path';
 import generateDifference from '../src/generateDifference.js';
+import stylish from '../src/formatters.js';
 import parseFiles from '../src/parsers.js';
 
 const __filename = fileURLToPath(import.meta.url);
@@ -15,11 +16,17 @@ test('generate json difference', () => {
   const file1 = readFile('file1.json');
   const file2 = readFile('file2.json');
   const expectedDifferences = readFile('expectedDiff.txt');
-  expect(generateDifference(parseFiles(file1, file2, '.json'))).toEqual(expectedDifferences);
+  expect(stylish(generateDifference(parseFiles(file1, file2, '.json')))).toEqual(expectedDifferences);
 });
 test('generate yaml difference', () => {
   const file1 = readFile('file1.yml');
   const file2 = readFile('file2.yml');
   const expectedDifferences = readFile('expectedDiff.txt');
-  expect(generateDifference(parseFiles(file1, file2, '.yml'))).toEqual(expectedDifferences);
+  expect(stylish(generateDifference(parseFiles(file1, file2, '.yml')))).toEqual(expectedDifferences);
+});
+test('generate json difference with nested structure', () => {
+  const file1 = readFile('file1nested.json');
+  const file2 = readFile('file2nested.json');
+  const expectedDifferences = readFile('expectedDiffNested.txt');
+  expect(stylish(generateDifference(parseFiles(file1, file2, '.json')))).toEqual(expectedDifferences);
 });
