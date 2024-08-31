@@ -2,11 +2,7 @@ import yaml from 'js-yaml';
 
 const parseFiles = (file1Data, file2Data, ext) => {
   // factory ???
-  // if (ext === '.json') {
-  //   return [JSON.parse(file1Data), JSON.parse(file2Data)];
-  // } if (ext === '.yml') {
-  //   return [yaml.load(file1Data), yaml.load(file2Data)];
-  // }
+
   let parsedFile1Data;
   let parsedFile2Data;
   switch (ext) {
