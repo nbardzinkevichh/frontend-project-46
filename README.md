@@ -11,3 +11,4 @@ asciinema 4 step - [![asciicast](https://asciinema.org/a/671903.svg)](https://as
 asciinema 6 step - [![asciicast](https://asciinema.org/a/672427.svg)](https://asciinema.org/a/672427)
 asciinema 7 step - [![asciicast](https://asciinema.org/a/674073.svg)](https://asciinema.org/a/674073)
 asciinema 8 step - [![asciicast](https://asciinema.org/a/674216.svg)](https://asciinema.org/a/674216)
+asciinema 9 step - [![asciicast](https://asciinema.org/a/674677.svg)](https://asciinema.org/a/674677)

@@ -8,9 +8,9 @@ import { readFileSync } from 'node:fs';
 
 import generateDifference from '../src/generateDifference.js';
 import parseFiles from '../src/parsers.js';
-// import stylish from '../src/formatters.js';
 import stylish from '../formatters/stylish.js';
 import plain from '../formatters/plain.js';
+import jsonFormatter from '../formatters/jsonFormatter.js';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
@@ -26,13 +26,17 @@ program
   .option('-f, --format [type]', 'output format', 'stylish')
   .action((filepath1, filepath2, options) => {
     // add try catch to open files
+    // add support json and yml differences at the same time
     const file1Data = readFile(filepath1);
     const file2Data = readFile(filepath2);
     const ext = path.extname(filepath1);
-    const parsedFiles = parseFiles(file1Data, file2Data, ext);
+    const parsedFiles = [parseFiles(file1Data, ext), parseFiles(file2Data, ext)];
     switch (options.format) {
       case 'plain':
         console.log(plain(generateDifference(parsedFiles)));
+        break;
+      case 'json':
+        console.log(JSON.stringify(jsonFormatter(generateDifference(parsedFiles)), null, 2));
         break;
       default:
         console.log(stylish(generateDifference(parsedFiles)));
