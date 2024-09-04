@@ -11,7 +11,7 @@ const stringify = (object) => {
 };
 
 const jsonFormatter = (data) => {
-  const formatter = (tree, groupName) => {
+  const formatter = (tree) => {
     const styledData = tree.map((object) => {
       switch (object.type) {
         case 'added':
@@ -34,7 +34,7 @@ const jsonFormatter = (data) => {
     return _.merge(...styledData);
   };
 
-  return formatter(data, '');
+  return formatter(data);
 };
 
 export default jsonFormatter;

@@ -14,22 +14,22 @@ const getFixturePath = (filename) => path.join(__dirname, '..', '__fixtures__', 
 const readFile = (filename) => readFileSync(getFixturePath(filename), 'utf-8');
 
 test('generate json difference', () => {
-  const file1 = readFile('file1.json');
-  const file2 = readFile('file2.json');
+  const file1 = parseFiles(readFile('file1.json'), '.json');
+  const file2 = parseFiles(readFile('file2.json'), '.json');
   const expectedDifferences = readFile('expectedDiff.txt');
-  expect(stylish(generateDifference(parseFiles(file1, file2, '.json')))).toEqual(expectedDifferences);
+  expect(stylish(generateDifference([file1, file2]))).toEqual(expectedDifferences);
 });
 test('generate yaml difference', () => {
-  const file1 = readFile('file1.yml');
-  const file2 = readFile('file2.yml');
+  const file1 = parseFiles(readFile('file1.yml'), '.yml');
+  const file2 = parseFiles(readFile('file2.yml'), '.yml');
   const expectedDifferences = readFile('expectedDiff.txt');
-  expect(stylish(generateDifference(parseFiles(file1, file2, '.yml')))).toEqual(expectedDifferences);
+  expect(stylish(generateDifference([file1, file2]))).toEqual(expectedDifferences);
 });
 test('generate json difference with nested structure', () => {
-  const file1 = readFile('file1nested.json');
-  const file2 = readFile('file2nested.json');
+  const file1 = parseFiles(readFile('file1nested.json'), '.json');
+  const file2 = parseFiles(readFile('file2nested.json'), '.json');
   const expectedDifferences = readFile('expectedDiffNested.txt');
   const expectedDifferencesPlain = readFile('expectedDiffPlain.txt');
-  expect(stylish(generateDifference(parseFiles(file1, file2, '.json')))).toEqual(expectedDifferences);
-  expect(plain(generateDifference(parseFiles(file1, file2, '.json')))).toEqual(expectedDifferencesPlain);
+  expect(stylish(generateDifference([file1, file2]))).toEqual(expectedDifferences);
+  expect(plain(generateDifference([file1, file2]))).toEqual(expectedDifferencesPlain);
 });
