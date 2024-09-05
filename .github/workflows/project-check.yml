@@ -1,5 +1,4 @@
-name: linter and tests check
-
+# Trigger the workflow on push or pull request
 on:
   - push
   - pull_request
@@ -8,7 +7,8 @@ env:
   CI: true
 
 jobs:
-  check:
+  build:
+    # The type of machine to run the job on
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
@@ -16,7 +16,6 @@ jobs:
         uses: actions/setup-node@v2
         with:
           node-version: "16"
-          cache: "npm"
       - name: Install dependencies
         run: |
           make install
@@ -26,8 +25,10 @@ jobs:
       - name: Run test
         run: |
           make test
-      - name: Code Climate Coverage Action
-        uses: paambaati/codeclimate-action@v3.0.0
+      - name: Test & publish code coverage
+        uses:
+          paambaati/codeclimate-action@v3.0.0
+          # Add Code Climate secret key
         env:
           CC_TEST_REPORTER_ID: ${{ secrets.CC_TEST_REPORTER_ID }}
         with:
