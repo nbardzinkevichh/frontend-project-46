@@ -3,14 +3,14 @@ import plain from './plain.js';
 import jsonFormatter from './jsonFormatter.js';
 import generateDifference from '../src/generateDifference.js';
 
-const formatter = (option, parsedFiles) => {
-  switch (option) {
+const formatter = (data, format) => {
+  switch (format) {
     case 'plain':
-      return plain(generateDifference(parsedFiles));
+      return plain(data);
     case 'json':
-      return JSON.stringify(jsonFormatter(generateDifference(parsedFiles)), null, 2);
+      return JSON.stringify(jsonFormatter(data), null, 2);
     default:
-      return stylish(generateDifference(parsedFiles));
+      return stylish(data);
   }
 };
 
