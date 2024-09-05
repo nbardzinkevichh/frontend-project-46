@@ -12,6 +12,12 @@ import stylish from '../formatters/stylish.js';
 import plain from '../formatters/plain.js';
 import jsonFormatter from '../formatters/jsonFormatter.js';
 
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
+
+const getFilesPath = (filename) => path.join(__dirname, '..', '__fixtures__', filename);
+const readFile = (filename) => readFileSync(getFilesPath(filename), 'utf-8');
+
 program
   .description('Compares two configuration files and shows a difference.')
   .version('1.0.0')
@@ -22,11 +28,6 @@ program
   .action((filepath1, filepath2, options) => {
     // add try catch to open files
     // add support json and yml differences at the same time
-    const __filename = fileURLToPath(import.meta.url);
-    const __dirname = dirname(__filename);
-
-    const getFilesPath = (filename) => path.join(__dirname, '..', '__fixtures__', filename);
-    const readFile = (filename) => readFileSync(getFilesPath(filename), 'utf-8');
     const file1Data = readFile(filepath1);
     const file2Data = readFile(filepath2);
     const ext = path.extname(filepath1);
@@ -41,5 +42,5 @@ program
       default:
         console.log(stylish(generateDifference(parsedFiles)));
     }
-  });
-program.parse();
+  })
+  .parse();
