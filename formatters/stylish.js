@@ -25,21 +25,22 @@ const stringify = (object, depth) => {
 const stylish = (data) => {
   const formatter = (tree, depth) => {
     const [currentIndent, bracketIndent] = countIndentSize(depth);
-
     const styledData = tree.flatMap((object) => {
-      if (object.type === 'added') {
-        return `${currentIndent}+ ${object.key}: ${stringify(object.value, depth + 1)}`;
+      switch (object.type) {
+        case 'added':
+          return `${currentIndent}+ ${object.key}: ${stringify(object.value, depth + 1)}`;
+        case 'deleted':
+          return `${currentIndent}- ${object.key}: ${stringify(object.value, depth + 1)}`;
+        case 'unchanged':
+          return `${currentIndent}  ${object.key}: ${stringify(object.value, depth + 1)}`;
+        case 'changed':
+          return [
+            `${currentIndent}- ${object.key}: ${stringify(object.firstValue, depth + 1)}`,
+            `${currentIndent}+ ${object.key}: ${stringify(object.secondValue, depth + 1)}`,
+          ];
+        default:
+          return `${currentIndent}  ${object.key}: ${formatter(object.value, depth + 1)}`;
       }
-      if (object.type === 'deleted') {
-        return `${currentIndent}- ${object.key}: ${stringify(object.value, depth + 1)}`;
-      }
-      if (object.type === 'unchanged') {
-        return `${currentIndent}  ${object.key}: ${stringify(object.value, depth + 1)}`;
-      }
-      if (object.type === 'changed') {
-        return [`${currentIndent}- ${object.key}: ${stringify(object.firstValue, depth + 1)}`, `${currentIndent}+ ${object.key}: ${stringify(object.secondValue)}`];
-      }
-      return `${currentIndent}  ${object.key}: ${formatter(object.value, depth + 1)}`;
     });
     return [
       '{',
