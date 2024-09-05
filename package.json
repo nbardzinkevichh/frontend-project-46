@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "Generate difference between two configuration files",
   "type": "module",
-  "main": "src/generateDifference.js",
+  "main": "bin/gendiff.js",
   "scripts": {
     "test": "npx jest"
   },
