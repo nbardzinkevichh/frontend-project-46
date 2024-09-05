@@ -42,5 +42,5 @@ program
       default:
         console.log(stylish(generateDifference(parsedFiles)));
     }
-  })
-  .parse();
+  });
+program.parse();
