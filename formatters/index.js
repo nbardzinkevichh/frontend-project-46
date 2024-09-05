@@ -1,7 +1,6 @@
 import stylish from './stylish.js';
 import plain from './plain.js';
 import jsonFormatter from './jsonFormatter.js';
-import generateDifference from '../src/generateDifference.js';
 
 const formatter = (data, format) => {
   switch (format) {
