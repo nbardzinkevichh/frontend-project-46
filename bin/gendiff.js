@@ -29,4 +29,4 @@ program
     const parsedFiles = [parseFiles(file1Data, ext), parseFiles(file2Data, ext)];
     console.log(formatter(options.format, parsedFiles));
   })
-  .parse();
+  .parse(process.argv);
