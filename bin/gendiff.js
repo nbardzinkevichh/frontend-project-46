@@ -23,6 +23,7 @@ program
   .version('1.0.0')
   .argument('<filepath1>')
   .argument('<filepath2>')
+  .allowUnknownOption()
   .option('-f, --format [type]', 'output format', 'stylish')
   .action((filepath1, filepath2, options) => {
     // add try catch to open files
